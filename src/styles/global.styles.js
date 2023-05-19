@@ -6,11 +6,15 @@ const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
-    #root {
-        min-height: 100vh;
-        background: #fafafa;
-        color: #2e2e2e;
-        font-family: "Lexend Deca", sans-serif;
+    body{
+      min-height: 100vh;
+      background: #fafafa;
+      color: #2e2e2e;
+      font-family: "Lexend Deca", sans-serif;
+    }
+    #root {  
+      max-width: 1024px;
+      margin: 0 auto;
     }
     a:hover, button:hover {
       opacity: 0.8;
