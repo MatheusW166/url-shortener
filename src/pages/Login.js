@@ -29,7 +29,7 @@ export default function Login() {
       setUser(user);
       navigate("/home");
     } catch (err) {
-      alert(err.response.data.error);
+      alert(err.response?.data.error ?? err.message);
     }
   }
 

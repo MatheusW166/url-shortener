@@ -36,7 +36,7 @@ export default function Home() {
       setUrls(me.shortenedUrls);
       input.value = "";
     } catch (err) {
-      alert(err.response.data);
+      alert(err.response?.data.error ?? err.message);
     }
   }
 
