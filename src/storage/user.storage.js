@@ -5,9 +5,8 @@ function saveToken(token) {
   localStorage.setItem(TOKEN_KEY, token);
 }
 
-function getToken(token) {
-  if (!token) return;
-  localStorage.get(TOKEN_KEY);
+function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
 }
 
 export { getToken, saveToken };
