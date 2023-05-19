@@ -15,7 +15,7 @@ export default function Rank() {
 
   return (
     <>
-      <Header />
+      <Header highlited={3} />
       <MainStyled>
         <RankTitleStyled>
           <Trophy size={48} color="#ffd233" weight="fill" />

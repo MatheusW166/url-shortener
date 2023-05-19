@@ -3,37 +3,19 @@ import Header from "../components/Header.js";
 import { ButtonStyled, InputStyled, MainStyled } from "../styled.js";
 import { getOpenUrl } from "../utils/url.utils.js";
 import UserUrlItem from "../components/UserUrlItem.js";
-import { useState } from "react";
-
-const urls = [
-  {
-    id: 18,
-    shortUrl: "7Nai8XJAA3QX0EsqpfDpD",
-    url: "https://google.com",
-    visitCount: 0,
-  },
-  {
-    id: 16,
-    shortUrl: "EJr7ebSMAIme6jeq1e42R",
-    url: "https://google.com",
-    visitCount: 2,
-  },
-  {
-    id: 15,
-    shortUrl: "2WPmdwLBivLjrXYzDOnAN",
-    url: "https://google.com",
-    visitCount: 4,
-  },
-  {
-    id: 17,
-    shortUrl: "J2m8EFKL7GvfK11eaJuPq",
-    url: "https://google.com",
-    visitCount: 1,
-  },
-];
+import { useEffect, useState } from "react";
+import { getMe } from "../services/user.services.js";
+import { shorten } from "../services/url.services.js";
 
 export default function Home() {
+  const [urls, setUrls] = useState();
   const [copiedText, setCopiedText] = useState("");
+
+  useEffect(() => {
+    getMe()
+      .then((me) => setUrls(me.shortenedUrls))
+      .catch(console.log);
+  }, []);
 
   async function handleUrlClick(shortUrl) {
     const copiedUrl = getOpenUrl(shortUrl);
@@ -41,12 +23,34 @@ export default function Home() {
     setCopiedText(copiedUrl);
   }
 
+  async function handleUrlSubmit(event) {
+    event.preventDefault();
+    const input = event.target.url;
+    const url = input.value?.trim();
+
+    if (!url) return;
+
+    try {
+      await shorten({ url });
+      const me = await getMe();
+      setUrls(me.shortenedUrls);
+      input.value = "";
+    } catch (err) {
+      alert(err.response.data);
+    }
+  }
+
   return (
     <>
-      <Header />
+      <Header highlited={2} />
       <MainStyled>
-        <ShortenFormStyled>
-          <InputStyled placeholder="Links que cabem no bolso" />
+        <ShortenFormStyled onSubmit={handleUrlSubmit}>
+          <InputStyled
+            name="url"
+            placeholder="Links que cabem no bolso"
+            type="url"
+            required
+          />
           <ButtonStyled>Encurtar link</ButtonStyled>
         </ShortenFormStyled>
         <UserUrlsListStyled>

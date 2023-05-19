@@ -5,4 +5,14 @@ async function getMe() {
   return res.data;
 }
 
-export { getMe };
+async function login({ email, password }) {
+  const res = await client.post("/signin", { email, password });
+  return res.data;
+}
+
+async function register({ email, password, name }) {
+  const res = await client.post("/signup", { email, password, name });
+  return res.data;
+}
+
+export { getMe, login, register };

@@ -37,6 +37,13 @@ const UserUrlItemStyled = styled.li`
   font-size: 14px;
   cursor: pointer;
 
+  p:first-child {
+    width: 30%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
   div {
     display: flex;
     justify-content: center;
@@ -50,6 +57,7 @@ const UserUrlItemStyled = styled.li`
     justify-content: space-between;
     padding: 24px;
     position: relative;
+    overflow: hidden;
 
     &:hover {
       background: #abcfa5;

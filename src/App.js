@@ -3,10 +3,11 @@ import GlobalStyles from "./styles/global.styles.js";
 import { BrowserRouter } from "react-router-dom";
 import MyRoutes from "./routes.js";
 import styled from "styled-components";
+import UserProvider from "./context/user.context.js";
 
 function App() {
   return (
-    <>
+    <UserProvider>
       <ResetStyles />
       <GlobalStyles />
       <AppContainerStyled>
@@ -14,7 +15,7 @@ function App() {
           <MyRoutes />
         </BrowserRouter>
       </AppContainerStyled>
-    </>
+    </UserProvider>
   );
 }
 

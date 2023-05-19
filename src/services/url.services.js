@@ -5,4 +5,9 @@ async function getRank() {
   return res.data ?? [];
 }
 
-export { getRank };
+async function shorten({ url }) {
+  const res = await client.post("/urls/shorten", { url });
+  return res.data;
+}
+
+export { getRank, shorten };

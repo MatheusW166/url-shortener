@@ -16,8 +16,9 @@ const GlobalStyles = createGlobalStyle`
       opacity: 0.8;
       cursor: pointer;
     }
-    button:disabled {
-      opacity: 0.4;
+    :disabled {
+      opacity: 0.4 !important;
+      cursor: auto !important;
     }
 `;
 
