@@ -1,12 +1,12 @@
 import { Copy, Trash, CheckCircle } from "@phosphor-icons/react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export default function UserUrlItem({
   url,
   shortUrl,
   visitCount,
   onClickUrl,
-  foiCopiado,
+  isCopied,
 }) {
   return (
     <UserUrlItemStyled>
@@ -14,7 +14,7 @@ export default function UserUrlItem({
         <p>{url}</p>
         <p>{shortUrl}</p>
         <p>Quantidade de visitantes: {visitCount}</p>
-        <CopyButtonStyled foiCopiado={foiCopiado}>
+        <CopyButtonStyled isCopied={isCopied}>
           <CheckCircle weight="fill" size={24} />
           <Copy weight="fill" size={24} />
         </CopyButtonStyled>
@@ -94,8 +94,8 @@ const CopyButtonStyled = styled.button`
     opacity: 0;
     transition: opacity ease 0.3s;
 
-    ${({ foiCopiado }) => `
-      &:nth-of-type(${foiCopiado ? 1 : 2}){
+    ${({ isCopied }) => `
+      &:nth-of-type(${isCopied ? 1 : 2}){
         opacity: 1;
       }
     `}

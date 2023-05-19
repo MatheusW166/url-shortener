@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const MainStyled = styled.main`
   padding: 24px;

@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Header from "../components/Header.js";
 import { ButtonStyled, InputStyled, MainStyled } from "../styled.js";
 import { getOpenUrl } from "../utils/url.utils.js";
@@ -58,7 +58,7 @@ export default function Home() {
                 url={url.url}
                 visitCount={url.visitCount}
                 onClickUrl={handleUrlClick}
-                foiCopiado={copiedText?.includes(url.shortUrl)}
+                isCopied={copiedText?.includes(url.shortUrl)}
               />
             );
           })}

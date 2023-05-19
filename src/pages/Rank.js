@@ -1,7 +1,7 @@
 import { Trophy } from "@phosphor-icons/react";
 import Header from "../components/Header.js";
 import { MainStyled } from "../styled.js";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getRank } from "../services/url.services.js";
 import RankList from "../components/RankList.js";
