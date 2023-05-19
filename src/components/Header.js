@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import SvgShort from "./SvgShort.js";
 
 export default function Header({ highlited, userName }) {
+  console.log("header");
   return (
     <HeaderStyled highlited={highlited}>
       {<p>{userName}</p>}

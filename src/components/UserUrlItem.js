@@ -1,45 +1,32 @@
-import { Trash } from "@phosphor-icons/react";
+import { Copy, Trash, CheckCircle } from "@phosphor-icons/react";
 import { styled } from "styled-components";
-import { getOpenUrl } from "../utils/url.utils.js";
-import { Copy } from "@phosphor-icons/react";
 
-export default function UserUrlsList({ urls }) {
-  async function copyToClipboard(shortUrl) {
-    await navigator.clipboard.writeText(getOpenUrl(shortUrl));
-  }
-
+export default function UserUrlItem({
+  url,
+  shortUrl,
+  visitCount,
+  onClickUrl,
+  foiCopiado,
+}) {
   return (
-    <UserUrlsListStyled>
-      {urls?.map((url) => {
-        return (
-          <UserUrlItem key={url.id}>
-            <div onClick={() => copyToClipboard(url.shortUrl)}>
-              <p>{url.url}</p>
-              <p>{url.shortUrl}</p>
-              <p>Quantidade de visitantes: {url.visitCount}</p>
-              <CopyButtonStyled>
-                <Copy weight="fill" size={24} />
-              </CopyButtonStyled>
-            </div>
-            <div>
-              <Trash weight="fill" size={24} color="#EA4F4F" />
-            </div>
-          </UserUrlItem>
-        );
-      })}
-    </UserUrlsListStyled>
+    <UserUrlItemStyled>
+      <div onClick={() => onClickUrl(shortUrl)}>
+        <p>{url}</p>
+        <p>{shortUrl}</p>
+        <p>Quantidade de visitantes: {visitCount}</p>
+        <CopyButtonStyled foiCopiado={foiCopiado}>
+          <CheckCircle weight="fill" size={24} />
+          <Copy weight="fill" size={24} />
+        </CopyButtonStyled>
+      </div>
+      <div>
+        <Trash weight="fill" size={24} color="#EA4F4F" />
+      </div>
+    </UserUrlItemStyled>
   );
 }
 
-const UserUrlsListStyled = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-top: 48px;
-  width: 100%;
-`;
-
-const UserUrlItem = styled.li`
+const UserUrlItemStyled = styled.li`
   height: 60px;
   display: flex;
   width: 100%;
@@ -98,6 +85,21 @@ const CopyButtonStyled = styled.button`
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(120, 177, 89, 0.8);
   background-color: #fafafa;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity ease 0.3s;
+
+    ${({ foiCopiado }) => `
+      &:nth-of-type(${foiCopiado ? 1 : 2}){
+        opacity: 1;
+      }
+    `}
+  }
 
   &:hover {
     opacity: 1;
