@@ -12,6 +12,13 @@ const GlobalStyles = createGlobalStyle`
         color: #2e2e2e;
         font-family: "Lexend Deca", sans-serif;
     }
+    a:hover, button:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.4;
+    }
 `;
 
 export default GlobalStyles;
