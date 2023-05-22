@@ -10,8 +10,13 @@ async function login({ email, password }) {
   return res.data;
 }
 
-async function register({ email, password, name }) {
-  const res = await client.post("/signup", { email, password, name });
+async function register({ email, password, confirmPassword, name }) {
+  const res = await client.post("/signup", {
+    email,
+    password,
+    confirmPassword,
+    name,
+  });
   return res.data;
 }
 
