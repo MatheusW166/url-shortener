@@ -10,4 +10,8 @@ async function shorten({ url }) {
   return res.data;
 }
 
-export { getRank, shorten };
+async function deleteUrl({ id }) {
+  await client.delete(`/urls/${id}`);
+}
+
+export { getRank, shorten, deleteUrl };

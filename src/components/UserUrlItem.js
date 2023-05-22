@@ -6,6 +6,7 @@ export default function UserUrlItem({
   shortUrl,
   visitCount,
   onClickUrl,
+  onClickTrash,
   isCopied,
 }) {
   return (
@@ -19,7 +20,7 @@ export default function UserUrlItem({
           <Copy weight="fill" size={24} />
         </CopyButtonStyled>
       </div>
-      <div>
+      <div onClick={onClickTrash}>
         <Trash weight="fill" size={24} color="#EA4F4F" />
       </div>
     </UserUrlItemStyled>

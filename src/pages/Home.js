@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import styled from "styled-components";
 import Header from "../components/Header.js";
 import { ButtonStyled, InputStyled, MainStyled } from "../styled.js";
@@ -5,7 +6,7 @@ import { getOpenUrl } from "../utils/url.utils.js";
 import UserUrlItem from "../components/UserUrlItem.js";
 import { useEffect, useState } from "react";
 import { getMe } from "../services/user.services.js";
-import { shorten } from "../services/url.services.js";
+import { deleteUrl, shorten } from "../services/url.services.js";
 
 export default function Home() {
   const [urls, setUrls] = useState();
@@ -23,13 +24,22 @@ export default function Home() {
     setCopiedText(copiedUrl);
   }
 
+  async function handleTrashClick(id) {
+    if (!confirm("Quer deletar essa url?")) return;
+    try {
+      await deleteUrl({ id });
+      const me = await getMe();
+      setUrls(me.shortenedUrls);
+    } catch (err) {
+      alert(err.response?.data.error ?? err.message);
+    }
+  }
+
   async function handleUrlSubmit(event) {
     event.preventDefault();
     const input = event.target.url;
     const url = input.value?.trim();
-
     if (!url) return;
-
     try {
       await shorten({ url });
       const me = await getMe();
@@ -62,6 +72,7 @@ export default function Home() {
                 url={url.url}
                 visitCount={url.visitCount}
                 onClickUrl={handleUrlClick}
+                onClickTrash={() => handleTrashClick(url.id)}
                 isCopied={copiedText?.includes(url.shortUrl)}
               />
             );
